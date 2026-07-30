@@ -1106,21 +1106,23 @@ footer {
     align-items: center;
     border-radius: 28px;
     padding: 10px 10px 10px 16px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 8px;
   }
 
   nav {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: flex-end;
     flex: 1;
-    gap: 2px;
+    gap: 0;
+    overflow: hidden;
   }
 
   nav a {
     min-width: auto;
-    padding: 7px 9px;
-    font-size: 0.8rem;
+    padding: 6px 8px;
+    font-size: 0.75rem;
+    white-space: nowrap;
   }
 
   .theme-toggle {
@@ -1206,12 +1208,19 @@ footer {
     width: calc(100vw - 20px);
   }
 
-  .brand {
+  /* Shorten brand name on very small screens to give nav room */
+  .brand span {
+    font-size: 0;
+  }
+
+  .brand span::after {
+    content: "DM";
     font-size: 0.86rem;
   }
 
   nav a {
-    font-size: 0.78rem;
+    font-size: 0.76rem;
+    padding: 6px 7px;
   }
 
   .section {
