@@ -9,8 +9,10 @@ import {
   IconCube3dSphere,
   IconDownload,
   IconMail,
+  IconMoon,
   IconPalette,
   IconSparkles,
+  IconSun,
   IconCertificate,
   IconCalendarEvent,
   IconChevronLeft,
@@ -474,6 +476,17 @@ function CursorFollower() {
 
 function Navigation() {
   const [scrolled, setScrolled] = useState(false);
+  const [dark, setDark] = useState(() => {
+    // respect system preference on first load
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+  }, [dark]);
 
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 30);
@@ -493,6 +506,13 @@ function Navigation() {
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
+      <button
+        className="theme-toggle"
+        onClick={() => setDark(d => !d)}
+        aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+      >
+        {dark ? <IconSun size={18} stroke={1.8} /> : <IconMoon size={18} stroke={1.8} />}
+      </button>
     </header>
   );
 }

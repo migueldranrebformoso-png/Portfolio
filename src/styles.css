@@ -18,6 +18,26 @@
   --blue: var(--iris);
   --porcelain: var(--offwhite);
 
+  /* ── Semantic tokens (light) ── */
+  --bg: var(--offwhite);
+  --bg-mesh-a: rgba(58, 12, 163, 0.18);
+  --bg-mesh-b: rgba(255, 242, 117, 0.22);
+  --bg-mesh-c: rgba(58, 12, 163, 0.10);
+  --bg-mid: #f0eefe;
+  --surface: rgba(250, 250, 248, 0.68);
+  --surface-nav: rgba(250, 250, 248, 0.72);
+  --surface-nav-scrolled: rgba(250, 250, 248, 0.88);
+  --surface-card: rgba(58, 12, 163, 0.04);
+  --surface-glass: rgba(250, 250, 248, 0.72);
+  --border-subtle: rgba(58, 12, 163, 0.12);
+  --border-yellow: rgba(255, 242, 117, 0.22);
+  --text-primary: #111111;
+  --text-muted: rgba(17, 17, 17, 0.66);
+  --text-nav: rgba(17, 17, 17, 0.68);
+  --grid-line: rgba(58, 12, 163, 0.04);
+  --timeline-dot-border: var(--offwhite);
+  --footer-text: rgba(17, 17, 17, 0.58);
+
   --line: rgba(58, 12, 163, 0.1);
   --glass: rgba(250, 250, 248, 0.58);
   --radius: 22px;
@@ -29,8 +49,35 @@
   --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
 
   font-family: "Space Grotesk", "General Sans", "Segoe UI", system-ui, sans-serif;
-  background: var(--offwhite);
-  color: var(--black);
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+/* ── Dark mode tokens ── */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0d0a1a;
+  --bg-mesh-a: rgba(58, 12, 163, 0.35);
+  --bg-mesh-b: rgba(255, 242, 117, 0.08);
+  --bg-mesh-c: rgba(58, 12, 163, 0.22);
+  --bg-mid: #110d24;
+  --surface: rgba(255, 242, 117, 0.03);
+  --surface-nav: rgba(13, 10, 26, 0.82);
+  --surface-nav-scrolled: rgba(13, 10, 26, 0.94);
+  --surface-card: rgba(255, 255, 255, 0.03);
+  --surface-glass: rgba(13, 10, 26, 0.72);
+  --border-subtle: rgba(255, 242, 117, 0.1);
+  --border-yellow: rgba(255, 242, 117, 0.18);
+  --text-primary: #f0eefe;
+  --text-muted: rgba(240, 238, 254, 0.55);
+  --text-nav: rgba(240, 238, 254, 0.68);
+  --grid-line: rgba(255, 242, 117, 0.03);
+  --timeline-dot-border: #0d0a1a;
+  --footer-text: rgba(240, 238, 254, 0.45);
+  --offwhite: #0d0a1a;
+  --porcelain: #0d0a1a;
+  --line: rgba(255, 242, 117, 0.08);
+  --shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -39,19 +86,19 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--offwhite);
+  background: var(--bg);
 }
 
 body {
   margin: 0;
   min-width: 320px;
   overflow-x: hidden;
-  /* Animated mesh: Royal Iris → Off White with Butter Yellow accents */
   background:
-    radial-gradient(circle at 78% 8%,  rgba(58, 12, 163, 0.18), transparent 36rem),
-    radial-gradient(circle at 6%  42%, rgba(255, 242, 117, 0.22), transparent 28rem),
-    radial-gradient(circle at 50% 90%, rgba(58, 12, 163, 0.10), transparent 30rem),
-    linear-gradient(180deg, var(--offwhite) 0%, #f0eefe 50%, var(--offwhite) 100%);
+    radial-gradient(circle at 78% 8%,  var(--bg-mesh-a), transparent 36rem),
+    radial-gradient(circle at 6%  42%, var(--bg-mesh-b), transparent 28rem),
+    radial-gradient(circle at 50% 90%, var(--bg-mesh-c), transparent 30rem),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-mid) 50%, var(--bg) 100%);
+  color: var(--text-primary);
 }
 
 body::before {
@@ -60,8 +107,8 @@ body::before {
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(rgba(58, 12, 163, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(58, 12, 163, 0.04) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: linear-gradient(to bottom, transparent, black 16%, black 84%, transparent);
 }
@@ -117,9 +164,9 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  border: 1px solid rgba(58, 12, 163, 0.15);
+  border: 1px solid var(--border-subtle);
   border-radius: 999px;
-  background: rgba(250, 250, 248, 0.72);
+  background: var(--surface-nav);
   padding: 0 12px 0 22px;
   box-shadow: 0 20px 80px rgba(58, 12, 163, 0.1);
   backdrop-filter: blur(22px) saturate(160%);
@@ -134,7 +181,7 @@ footer {
 
 .nav-shell.is-scrolled {
   height: 56px;
-  background: rgba(250, 250, 248, 0.88);
+  background: var(--surface-nav-scrolled);
   box-shadow: 0 16px 56px rgba(58, 12, 163, 0.12);
 }
 
@@ -167,7 +214,7 @@ nav a {
   min-width: 72px;
   border-radius: 999px;
   padding: 10px 14px;
-  color: rgba(17, 17, 17, 0.68);
+  color: var(--text-nav);
   font-size: 0.9rem;
   text-align: center;
   transition: color 160ms var(--ease-out), background 160ms var(--ease-out);
@@ -238,7 +285,7 @@ h1 span {
 }
 
 h2 {
-  color: var(--black);
+  color: var(--text-primary);
   font-size: clamp(2.6rem, 6.4vw, 6.4rem);
   line-height: 0.92;
   letter-spacing: 0;
@@ -298,8 +345,8 @@ h3 {
 }
 
 .magnetic-button.secondary {
-  border: 1px solid rgba(58, 12, 163, 0.16);
-  background: rgba(250, 250, 248, 0.72);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-glass);
   color: var(--iris);
   backdrop-filter: blur(18px);
 }
@@ -420,9 +467,9 @@ h3 {
 
 .stat {
   min-height: 124px;
-  border: 1px solid rgba(58, 12, 163, 0.1);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius);
-  background: rgba(250, 250, 248, 0.68);
+  background: var(--surface);
   padding: 18px;
   backdrop-filter: blur(16px);
 }
@@ -436,7 +483,7 @@ h3 {
 }
 
 .stat span {
-  color: rgba(17, 17, 17, 0.66);
+  color: var(--text-muted);
   font-size: 0.9rem;
   line-height: 1.25;
 }
@@ -515,13 +562,12 @@ h3 {
   position: relative;
   z-index: 1;
   min-height: 300px;
-  border: 1px solid rgba(255, 242, 117, 0.22);
+  border: 1px solid var(--border-yellow);
   border-radius: var(--radius);
-  background: rgba(58, 12, 163, 0.04);
+  background: var(--surface-card);
   padding: 28px;
   box-shadow: 0 24px 70px rgba(58, 12, 163, 0.1), inset 0 1px 0 rgba(255, 242, 117, 0.18);
   backdrop-filter: blur(22px) saturate(155%);
-  /* Use exact properties, not 'all' */
   transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out), border-color 220ms var(--ease-out);
 }
 
@@ -580,12 +626,11 @@ h3 {
   min-height: 470px;
   grid-template-columns: 1.08fr 0.92fr;
   overflow: hidden;
-  border: 1px solid rgba(255, 242, 117, 0.2);
+  border: 1px solid var(--border-yellow);
   border-radius: var(--radius);
-  background: rgba(58, 12, 163, 0.03);
+  background: var(--surface-card);
   box-shadow: 0 28px 84px rgba(58, 12, 163, 0.1);
   backdrop-filter: blur(24px);
-  /* TiltCard (motion.div) handles transform - only transition shadow here */
   transition: box-shadow 220ms var(--ease-out);
 }
 
@@ -599,7 +644,7 @@ h3 {
   position: relative;
   min-height: 360px;
   overflow: hidden;
-  background: #ffffff;
+  background: var(--surface);
 }
 
 .project-visual::before,
@@ -738,9 +783,9 @@ h3 {
   min-height: 46px;
   align-items: center;
   gap: 8px;
-  border: 1px solid rgba(58, 12, 163, 0.14);
+  border: 1px solid var(--border-subtle);
   border-radius: 999px;
-  background: rgba(250, 250, 248, 0.72);
+  background: var(--surface-glass);
   padding: 0 16px;
   color: var(--iris);
   font-weight: 720;
@@ -802,7 +847,7 @@ h3 {
   top: 14px;
   width: 25px;
   height: 25px;
-  border: 7px solid var(--offwhite);
+  border: 7px solid var(--bg);
   border-radius: 50%;
   background: var(--yellow);
   box-shadow: 0 0 0 1px rgba(58, 12, 163, 0.18), 0 0 22px rgba(255, 242, 117, 0.8);
@@ -816,13 +861,12 @@ h3 {
 .contact-panel {
   min-height: 520px;
   overflow: hidden;
-  border: 1px solid rgba(255, 242, 117, 0.22);
+  border: 1px solid var(--border-yellow);
   border-radius: var(--radius);
-  /* Glassmorphism: Royal Iris → Deep Indigo, yellow rim light */
   background:
     radial-gradient(circle at 78% 28%, rgba(58, 12, 163, 0.28), transparent 38%),
     radial-gradient(circle at 18% 72%, rgba(255, 242, 117, 0.14), transparent 30%),
-    rgba(250, 250, 248, 0.72);
+    var(--surface-glass);
   padding: clamp(34px, 7vw, 90px);
   box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 242, 117, 0.22);
   backdrop-filter: blur(24px) saturate(150%);
@@ -863,9 +907,9 @@ h3 {
 .carousel-card {
   flex: 0 0 300px;
   scroll-snap-align: start;
-  border: 1px solid rgba(255, 242, 117, 0.2);
+  border: 1px solid var(--border-yellow);
   border-radius: var(--radius);
-  background: rgba(58, 12, 163, 0.04);
+  background: var(--surface-card);
   backdrop-filter: blur(20px) saturate(150%);
   box-shadow: 0 16px 48px rgba(58, 12, 163, 0.1), inset 0 1px 0 rgba(255, 242, 117, 0.15);
   overflow: hidden;
@@ -958,9 +1002,9 @@ h3 {
   justify-content: center;
   width: 44px;
   height: 44px;
-  border: 1px solid rgba(58, 12, 163, 0.16);
+  border: 1px solid var(--border-subtle);
   border-radius: 999px;
-  background: rgba(250, 250, 248, 0.72);
+  background: var(--surface-glass);
   color: var(--iris);
   cursor: pointer;
   transition: background 160ms var(--ease-out), border-color 160ms var(--ease-out), transform 160ms var(--ease-out);
@@ -985,13 +1029,66 @@ h3 {
 }
 
 footer {
+  display: flex;
+  width: min(1280px, calc(100vw - 40px));
   margin: 0 auto;
   justify-content: space-between;
   gap: 18px;
   border-top: 1px solid var(--line);
   padding: 28px 0 42px;
-  color: rgba(17, 17, 17, 0.58);
+  color: var(--footer-text);
   font-size: 0.92rem;
+}
+
+/* ── Dark mode toggle button ── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background: var(--surface-card);
+  color: var(--text-nav);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 160ms var(--ease-out), border-color 160ms var(--ease-out), transform 160ms var(--ease-out), color 160ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover {
+    background: rgba(255, 242, 117, 0.14);
+    border-color: rgba(255, 242, 117, 0.45);
+    color: var(--iris);
+    transform: rotate(20deg);
+  }
+}
+
+.theme-toggle:active {
+  transform: scale(0.92);
+}
+
+/* Smooth color transitions when switching theme */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 220ms;
+  transition-timing-function: var(--ease-out);
+}
+
+/* But don't let the global transition override motion-specific transitions */
+.magnetic-button,
+.skill-card,
+.project-card,
+.carousel-card,
+.carousel-btn,
+.project-actions a,
+.contact-links a,
+.nav-shell,
+.theme-toggle {
+  transition-property: transform, background-color, border-color, color, box-shadow;
 }
 
 /* Reveal animations handled by Motion whileInView in App.tsx - no blur, opacity+y only */
