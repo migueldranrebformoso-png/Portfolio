@@ -1107,10 +1107,6 @@ footer {
 
 .loader-curtain-top {
   background: var(--iris);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 12px;
 }
 
 .loader-curtain-bottom {
@@ -1118,12 +1114,18 @@ footer {
 }
 
 .loader-curtain-label {
-  display: block;
-  font-size: clamp(1.1rem, 3vw, 1.8rem);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: rgba(255, 242, 117, 0.9);
-  text-transform: lowercase;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  font-size: clamp(3.5rem, 12vw, 8rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  line-height: 1;
 }
 /* ── /Loading Screen ──────────────────────────────────────────────────────── */
 

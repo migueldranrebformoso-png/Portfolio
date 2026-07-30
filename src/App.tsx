@@ -46,15 +46,17 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
         exit={{ y: "-100%" }}
         transition={transition}
       >
-        <motion.span
-          className="loader-curtain-label"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5, ease: [0.23, 1, 0.32, 1] as [number,number,number,number] }}
-        >
-          dreb.me
-        </motion.span>
       </motion.div>
+
+      {/* DM monogram — centered over both panels */}
+      <motion.span
+        className="loader-curtain-label"
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.15, duration: 0.5, ease: [0.23, 1, 0.32, 1] as [number,number,number,number] }}
+      >
+        DM
+      </motion.span>
 
       {/* Bottom panel — Butter Yellow, slides down */}
       <motion.div
