@@ -26,12 +26,47 @@ import { motion, useMotionValue, useSpring, useReducedMotion, AnimatePresence } 
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ── Loading Screen ────────────────────────────────────────────────────────────
+// ── Loading Screen — Counter 0→100% ──────────────────────────────────────────
 function LoadingScreen({ onDone }: { onDone: () => void }) {
   const reduced = useReducedMotion();
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const timer = setTimeout(onDone, reduced ? 400 : 2200);
+    if (reduced) {
+      setCount(100);
+      const t = setTimeout(onDone, 300);
+      return () => clearTimeout(t);
+    }
+
+    let current = 0;
+    // non-linear easing: fast start, slow finish
+    const intervals = [
+      { target: 30, step: 3, delay: 30 },
+      { target: 70, step: 2, delay: 40 },
+      { target: 90, step: 1, delay: 60 },
+      { target: 100, step: 1, delay: 90 },
+    ];
+
+    let phase = 0;
+    let timer: ReturnType<typeof setTimeout>;
+
+    const tick = () => {
+      const { target, step, delay } = intervals[phase];
+      current = Math.min(current + step, target);
+      setCount(current);
+
+      if (current < target) {
+        timer = setTimeout(tick, delay);
+      } else if (phase < intervals.length - 1) {
+        phase++;
+        timer = setTimeout(tick, intervals[phase].delay);
+      } else {
+        // reached 100 — wait then exit
+        timer = setTimeout(onDone, 520);
+      }
+    };
+
+    timer = setTimeout(tick, 120);
     return () => clearTimeout(timer);
   }, [onDone, reduced]);
 
@@ -40,39 +75,33 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
       className="loader"
       initial={{ opacity: 1 }}
       exit={{
-        y: "-100%",
-        transition: { duration: 0.7, ease: [0.77, 0, 0.175, 1] },
+        opacity: 0,
+        transition: { duration: 0.55, ease: [0.23, 1, 0.32, 1] },
       }}
     >
-      <motion.div
-        className="loader-monogram"
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-      >
-        DM
-      </motion.div>
-      <motion.div
-        className="loader-bar-wrap"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.4 }}
-      >
+      {/* Counter */}
+      <div className="loader-counter">
+        <motion.span
+          key={count}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.12, ease: [0.23, 1, 0.32, 1] }}
+        >
+          {String(count).padStart(3, "0")}
+        </motion.span>
+        <span className="loader-percent">%</span>
+      </div>
+
+      {/* Progress line */}
+      <div className="loader-bar-wrap">
         <motion.div
           className="loader-bar"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 0.5, duration: 1.4, ease: [0.23, 1, 0.32, 1] }}
+          style={{ scaleX: count / 100 }}
         />
-      </motion.div>
-      <motion.p
-        className="loader-label"
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 0.5, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.5 }}
-      >
-        dreb.me
-      </motion.p>
+      </div>
+
+      {/* Label */}
+      <p className="loader-label">Loading</p>
     </motion.div>
   );
 }
