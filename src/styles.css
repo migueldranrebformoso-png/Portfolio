@@ -1158,7 +1158,13 @@ footer {
   }
 
   .project-visual {
-    min-height: 300px;
+    min-height: 260px;
+    background-color: var(--offwhite);
+  }
+
+  .project-screenshot {
+    object-fit: contain;
+    object-position: center center;
   }
 
   .contact-panel {
