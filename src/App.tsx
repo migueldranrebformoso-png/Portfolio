@@ -22,9 +22,60 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import * as THREE from "three";
-import { motion, useMotionValue, useSpring, useReducedMotion } from "motion/react";
+import { motion, useMotionValue, useSpring, useReducedMotion, AnimatePresence } from "motion/react";
 
 gsap.registerPlugin(ScrollTrigger);
+
+// ── Loading Screen ────────────────────────────────────────────────────────────
+function LoadingScreen({ onDone }: { onDone: () => void }) {
+  const reduced = useReducedMotion();
+
+  useEffect(() => {
+    const timer = setTimeout(onDone, reduced ? 400 : 2200);
+    return () => clearTimeout(timer);
+  }, [onDone, reduced]);
+
+  return (
+    <motion.div
+      className="loader"
+      initial={{ opacity: 1 }}
+      exit={{
+        y: "-100%",
+        transition: { duration: 0.7, ease: [0.77, 0, 0.175, 1] },
+      }}
+    >
+      <motion.div
+        className="loader-monogram"
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+      >
+        DM
+      </motion.div>
+      <motion.div
+        className="loader-bar-wrap"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3, duration: 0.4 }}
+      >
+        <motion.div
+          className="loader-bar"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ delay: 0.5, duration: 1.4, ease: [0.23, 1, 0.32, 1] }}
+        />
+      </motion.div>
+      <motion.p
+        className="loader-label"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 0.5, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.5 }}
+      >
+        dreb.me
+      </motion.p>
+    </motion.div>
+  );
+}
 
 // ── Reveal wrapper: opacity+y, once, stagger via delay prop ──────────────────
 function Reveal({
@@ -557,6 +608,8 @@ function MagneticButton({
 }
 
 function App() {
+  const [loaded, setLoaded] = useState(false);
+
   useEffect(() => {
     const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
     const raf = (time: number) => {
@@ -584,6 +637,9 @@ function App() {
 
   return (
     <>
+      <AnimatePresence>
+        {!loaded && <LoadingScreen key="loader" onDone={() => setLoaded(true)} />}
+      </AnimatePresence>
       <CursorFollower />
       <ThreeScene />
       <Navigation />

@@ -1091,6 +1091,56 @@ footer {
   transition-property: transform, background-color, border-color, color, box-shadow;
 }
 
+/* ── Loading Screen ───────────────────────────────────────────────────────── */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  background: #0d0a1a;
+  pointer-events: all;
+}
+
+.loader-monogram {
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--yellow);
+  filter: drop-shadow(0 0 40px rgba(255, 242, 117, 0.5));
+  line-height: 1;
+}
+
+.loader-bar-wrap {
+  width: min(280px, 60vw);
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.loader-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--yellow), var(--iris));
+  transform-origin: left center;
+  border-radius: 999px;
+}
+
+.loader-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--offwhite);
+  margin: 0;
+  text-transform: lowercase;
+}
+
+/* ── Loading Screen ───────────────────────────────────────────────────────── */
+
 /* Reveal animations handled by Motion whileInView in App.tsx - no blur, opacity+y only */
 
 @media (max-width: 980px) {
