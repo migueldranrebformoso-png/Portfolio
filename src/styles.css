@@ -167,7 +167,7 @@ a {
   border: 1px solid var(--border-subtle);
   border-radius: 999px;
   background: var(--surface-nav);
-  padding: 0 12px 0 22px;
+  padding: 0 14px 0 22px;
   box-shadow: 0 20px 80px rgba(58, 12, 163, 0.1);
   backdrop-filter: blur(22px) saturate(160%);
   transition: height 220ms var(--ease-out), background 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
@@ -244,7 +244,7 @@ nav a:focus-visible {
   display: grid;
   min-height: 100dvh;
   align-items: center;
-  padding-top: 82px;
+  padding-top: 100px;
 }
 
 .hero-content {
@@ -254,7 +254,7 @@ nav a:focus-visible {
 .hero-kicker {
   display: inline-flex;
   width: fit-content;
-  margin: 0 0 26px;
+  margin: 0 0 32px;
   border: 1px solid rgba(58, 12, 163, 0.18);
   border-radius: 999px;
   background: rgba(255, 242, 117, 0.14);
@@ -1105,7 +1105,7 @@ footer {
     min-height: 58px;
     align-items: center;
     border-radius: 28px;
-    padding: 10px 10px 10px 16px;
+    padding: 10px 12px 10px 18px;
     flex-wrap: nowrap;
     gap: 8px;
   }
@@ -1230,7 +1230,7 @@ footer {
 
   .hero {
     min-height: 100dvh;
-    padding-top: 128px;
+    padding-top: 140px;
   }
 
   .hero-kicker {
