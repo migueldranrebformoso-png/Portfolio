@@ -26,82 +26,42 @@ import { motion, useMotionValue, useSpring, useReducedMotion, AnimatePresence } 
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ── Loading Screen — Counter 0→100% ──────────────────────────────────────────
+// ── Loading Screen — Curtain Wipe (Option D) ─────────────────────────────────
 function LoadingScreen({ onDone }: { onDone: () => void }) {
   const reduced = useReducedMotion();
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (reduced) {
-      setCount(100);
-      const t = setTimeout(onDone, 300);
-      return () => clearTimeout(t);
-    }
-
-    let current = 0;
-    // non-linear easing: fast start, slow finish
-    const intervals = [
-      { target: 30, step: 3, delay: 30 },
-      { target: 70, step: 2, delay: 40 },
-      { target: 90, step: 1, delay: 60 },
-      { target: 100, step: 1, delay: 90 },
-    ];
-
-    let phase = 0;
-    let timer: ReturnType<typeof setTimeout>;
-
-    const tick = () => {
-      const { target, step, delay } = intervals[phase];
-      current = Math.min(current + step, target);
-      setCount(current);
-
-      if (current < target) {
-        timer = setTimeout(tick, delay);
-      } else if (phase < intervals.length - 1) {
-        phase++;
-        timer = setTimeout(tick, intervals[phase].delay);
-      } else {
-        // reached 100 — wait then exit
-        timer = setTimeout(onDone, 520);
-      }
-    };
-
-    timer = setTimeout(tick, 120);
-    return () => clearTimeout(timer);
+    const t = setTimeout(onDone, reduced ? 300 : 1400);
+    return () => clearTimeout(t);
   }, [onDone, reduced]);
 
+  const ease: [number, number, number, number] = [0.77, 0, 0.175, 1];
+  const transition = { duration: 0.7, delay: 0.05, ease };
+
   return (
-    <motion.div
-      className="loader"
-      initial={{ opacity: 1 }}
-      exit={{
-        opacity: 0,
-        transition: { duration: 0.55, ease: [0.23, 1, 0.32, 1] },
-      }}
-    >
-      {/* Counter */}
-      <div className="loader-counter">
+    <motion.div className="loader-curtain-wrap">
+      {/* Top panel — Royal Iris, slides up */}
+      <motion.div
+        className="loader-curtain loader-curtain-top"
+        exit={{ y: "-100%" }}
+        transition={transition}
+      >
         <motion.span
-          key={count}
-          initial={{ opacity: 0, y: 12 }}
+          className="loader-curtain-label"
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.12, ease: [0.23, 1, 0.32, 1] }}
+          transition={{ delay: 0.2, duration: 0.5, ease: [0.23, 1, 0.32, 1] as [number,number,number,number] }}
         >
-          {String(count).padStart(3, "0")}
+          dreb.me
         </motion.span>
-        <span className="loader-percent">%</span>
-      </div>
+      </motion.div>
 
-      {/* Progress line */}
-      <div className="loader-bar-wrap">
-        <motion.div
-          className="loader-bar"
-          style={{ scaleX: count / 100 }}
-        />
-      </div>
-
-      {/* Label */}
-      <p className="loader-label">Loading</p>
+      {/* Bottom panel — Butter Yellow, slides down */}
+      <motion.div
+        className="loader-curtain loader-curtain-bottom"
+        exit={{ y: "100%" }}
+        transition={transition}
+      />
     </motion.div>
   );
 }
@@ -666,7 +626,7 @@ function App() {
 
   return (
     <>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {!loaded && <LoadingScreen key="loader" onDone={() => setLoaded(true)} />}
       </AnimatePresence>
       <CursorFollower />
