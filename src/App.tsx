@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import {
   IconArrowUpRight,
   IconBrandGithub,
@@ -11,6 +11,10 @@ import {
   IconMail,
   IconPalette,
   IconSparkles,
+  IconCertificate,
+  IconCalendarEvent,
+  IconChevronLeft,
+  IconChevronRight,
 } from "@tabler/icons-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -174,6 +178,123 @@ const timeline = [
   ["Personal Projects", "Building frontend experiments, AI workflows, and portfolio-grade product concepts."],
   ["AI Experiments", "Testing prompt systems, automation patterns, and human-centered AI tools."],
 ];
+
+// ── Add your certificates here ─────────────────────────────────────────────
+const certificates = [
+  {
+    title: "Commit to the Cloud:A Hands-on Introduction to GIT, GitHub & Cloud Deployment with AWS  ",
+    issuer: "Amazon Web Services / QCU",
+    date: "2026",
+    image: "/certs/aws-qcu.jpg",
+  },
+  // copy the block above to add more
+];
+
+// ── Add your activities here ───────────────────────────────────────────────
+const activities = [
+  {
+    title: "AWS Summit",
+    role: "Attendee",
+    date: "2026",
+    desc: "Attended the AWS Summit, exploring cloud services, AI tools, and developer sessions.",
+    image: "/activities/awss.jpg",
+  },
+  {
+    title: "Kiroverse",
+    role: "Participant",
+    date: "2026",
+    desc: "Participated in Kiroverse, an event focused on AI-assisted development and modern tooling.",
+    image: "/activities/kiroverse.jpg",
+  },
+  // copy the block above to add more
+];
+
+// ── Carousel ──────────────────────────────────────────────────────────────
+function Carousel({
+  children,
+  label,
+}: {
+  children: React.ReactNode[];
+  label: string;
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+  const reduced = useReducedMotion();
+
+  // drag state
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const startScroll = useRef(0);
+
+  const updateButtons = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    setCanPrev(el.scrollLeft > 4);
+    setCanNext(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    updateButtons();
+    el.addEventListener("scroll", updateButtons, { passive: true });
+    return () => el.removeEventListener("scroll", updateButtons);
+  }, [updateButtons]);
+
+  const scroll = (dir: "prev" | "next") => {
+    const el = trackRef.current;
+    if (!el) return;
+    const amount = el.clientWidth * 0.75;
+    el.scrollBy({ left: dir === "next" ? amount : -amount, behavior: reduced ? "instant" : "smooth" });
+  };
+
+  // pointer drag
+  const onPointerDown = (e: React.PointerEvent) => {
+    isDragging.current = true;
+    startX.current = e.clientX;
+    startScroll.current = trackRef.current?.scrollLeft ?? 0;
+    trackRef.current?.setPointerCapture(e.pointerId);
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!isDragging.current || !trackRef.current) return;
+    trackRef.current.scrollLeft = startScroll.current - (e.clientX - startX.current);
+  };
+  const onPointerUp = () => { isDragging.current = false; };
+
+  return (
+    <div className="carousel-wrap" aria-label={label}>
+      <div
+        className="carousel-track"
+        ref={trackRef}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerLeave={onPointerUp}
+      >
+        {children}
+      </div>
+      <div className="carousel-controls">
+        <button
+          className="carousel-btn"
+          onClick={() => scroll("prev")}
+          disabled={!canPrev}
+          aria-label="Previous"
+        >
+          <IconChevronLeft size={20} />
+        </button>
+        <button
+          className="carousel-btn"
+          onClick={() => scroll("next")}
+          disabled={!canNext}
+          aria-label="Next"
+        >
+          <IconChevronRight size={20} />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 function ThreeScene() {
   const mountRef = useRef<HTMLDivElement | null>(null);
@@ -616,6 +737,65 @@ function App() {
               </Reveal>
             ))}
           </div>
+        </section>
+
+        {/* ── Certificates ── */}
+        <section className="section" id="certificates">
+          <Reveal>
+            <div className="section-title narrow">
+              <IconCertificate size={24} stroke={1.5} />
+              <h2>Certificates</h2>
+              <p>Courses, programs, and recognitions earned along the way.</p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <Carousel label="Certificates carousel">
+              {certificates.map((cert, i) => (
+                <article className="carousel-card" key={i}>
+                  <div className="carousel-card-visual cert-visual">
+                    {cert.image
+                      ? <img src={cert.image} alt={cert.title} />
+                      : <IconCertificate size={40} stroke={1.2} />}
+                  </div>
+                  <div className="carousel-card-body">
+                    <span className="carousel-card-date">{cert.date}</span>
+                    <h3>{cert.title}</h3>
+                    <p>{cert.issuer}</p>
+                  </div>
+                </article>
+              ))}
+            </Carousel>
+          </Reveal>
+        </section>
+
+        {/* ── Activities ── */}
+        <section className="section" id="activities">
+          <Reveal>
+            <div className="section-title narrow">
+              <IconCalendarEvent size={24} stroke={1.5} />
+              <h2>Activities</h2>
+              <p>Hackathons, events, and community work I have been part of.</p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <Carousel label="Activities carousel">
+              {activities.map((act, i) => (
+                <article className="carousel-card" key={i}>
+                  <div className="carousel-card-visual act-visual">
+                    {act.image
+                      ? <img src={act.image} alt={act.title} />
+                      : <IconCalendarEvent size={40} stroke={1.2} />}
+                  </div>
+                  <div className="carousel-card-body">
+                    <span className="carousel-card-date">{act.date}</span>
+                    <h3>{act.title}</h3>
+                    <p className="carousel-card-role">{act.role}</p>
+                    <p>{act.desc}</p>
+                  </div>
+                </article>
+              ))}
+            </Carousel>
+          </Reveal>
         </section>
 
         {/* ── Contact ── */}
