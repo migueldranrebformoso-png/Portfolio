@@ -71,7 +71,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
         animate={{ opacity: 0.5, y: 0 }}
         transition={{ delay: 0.6, duration: 0.5 }}
       >
-        dreb.me
+        Artificial Intelligence
       </motion.p>
     </motion.div>
   );
