@@ -26,44 +26,53 @@ import { motion, useMotionValue, useSpring, useReducedMotion, AnimatePresence } 
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ── Loading Screen — Curtain Wipe (Option D) ─────────────────────────────────
+// ── Loading Screen — DM monogram + progress bar ──────────────────────────────
 function LoadingScreen({ onDone }: { onDone: () => void }) {
   const reduced = useReducedMotion();
 
   useEffect(() => {
-    const t = setTimeout(onDone, reduced ? 300 : 1400);
-    return () => clearTimeout(t);
+    const timer = setTimeout(onDone, reduced ? 400 : 2200);
+    return () => clearTimeout(timer);
   }, [onDone, reduced]);
 
-  const ease: [number, number, number, number] = [0.77, 0, 0.175, 1];
-  const transition = { duration: 0.7, delay: 0.05, ease };
-
   return (
-    <motion.div className="loader-curtain-wrap">
-      {/* Top panel — Royal Iris, slides up */}
+    <motion.div
+      className="loader"
+      initial={{ opacity: 1 }}
+      exit={{
+        y: "-100%",
+        transition: { duration: 0.7, ease: [0.77, 0, 0.175, 1] as [number,number,number,number] },
+      }}
+    >
       <motion.div
-        className="loader-curtain loader-curtain-top"
-        exit={{ y: "-100%" }}
-        transition={transition}
-      >
-      </motion.div>
-
-      {/* DM monogram — centered over both panels */}
-      <motion.span
-        className="loader-curtain-label"
+        className="loader-monogram"
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.15, duration: 0.5, ease: [0.23, 1, 0.32, 1] as [number,number,number,number] }}
+        transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] as [number,number,number,number] }}
       >
         DM
-      </motion.span>
-
-      {/* Bottom panel — Butter Yellow, slides down */}
+      </motion.div>
       <motion.div
-        className="loader-curtain loader-curtain-bottom"
-        exit={{ y: "100%" }}
-        transition={transition}
-      />
+        className="loader-bar-wrap"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3, duration: 0.4 }}
+      >
+        <motion.div
+          className="loader-bar"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ delay: 0.5, duration: 1.4, ease: [0.23, 1, 0.32, 1] as [number,number,number,number] }}
+        />
+      </motion.div>
+      <motion.p
+        className="loader-label"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 0.5, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.5 }}
+      >
+        dreb.me
+      </motion.p>
     </motion.div>
   );
 }
