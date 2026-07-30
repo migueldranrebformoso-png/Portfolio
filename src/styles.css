@@ -1103,20 +1103,30 @@ footer {
     top: 12px;
     height: auto;
     min-height: 58px;
-    align-items: flex-start;
+    align-items: center;
     border-radius: 28px;
-    padding: 14px;
+    padding: 10px 10px 10px 16px;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   nav {
     flex-wrap: wrap;
     justify-content: flex-end;
+    flex: 1;
+    gap: 2px;
   }
 
   nav a {
     min-width: auto;
-    padding: 8px 10px;
-    font-size: 0.82rem;
+    padding: 7px 9px;
+    font-size: 0.8rem;
+  }
+
+  .theme-toggle {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
   }
 
   .hero {
@@ -1227,15 +1237,24 @@ footer {
   }
 
   .button-row,
-  .project-actions,
-  .contact-links {
+  .project-actions {
     flex-direction: column;
   }
 
   .magnetic-button,
-  .project-actions a,
-  .contact-links a {
+  .project-actions a {
     width: 100%;
+  }
+
+  .contact-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .contact-links a {
+    flex: 1 1 calc(50% - 6px);
+    min-width: 130px;
+    justify-content: center;
   }
 
   .stat-grid,
