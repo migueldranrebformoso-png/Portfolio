@@ -165,7 +165,7 @@ const projects = [
     tags: ["Three.js", "GSAP", "Motion"],
     gradient: "project-c",
     year: "2026",
-    liveUrl: null,
+    liveUrl: "https://www.dreb.me",
     githubUrl: null,
     image: null,
   },
