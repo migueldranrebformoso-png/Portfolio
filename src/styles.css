@@ -363,13 +363,6 @@ h3 {
 .portrait-wrap {
   position: sticky;
   top: 120px;
-  /* Reveal wrapper is the direct child, portrait-wrap class applied via className prop */
-}
-
-/* When Reveal wraps portrait-wrap, ensure the motion div is sticky too */
-.about > div:first-child {
-  position: sticky;
-  top: 120px;
   align-self: start;
 }
 
@@ -1053,6 +1046,7 @@ footer {
   .portrait-wrap {
     position: relative;
     top: auto;
+    align-self: auto;
   }
 
   .stat-grid,
