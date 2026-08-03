@@ -27,20 +27,75 @@ import { motion, useMotionValue, useSpring, useReducedMotion, AnimatePresence } 
 gsap.registerPlugin(ScrollTrigger);
 
 // ── Loading Screen — eat(); sleep(); code(); repeat(); ───────────────────────
-const loaderItems = [
-  { icon: "🍴", label: "eat",    semi: true },
-  { icon: "🛌", label: "sleep",  semi: true },
-  { icon: "</>", label: "code",  semi: true },
-  { icon: "↻",  label: "repeat", semi: true },
-];
-
 function LoadingScreen({ onDone }: { onDone: () => void }) {
   const reduced = useReducedMotion();
 
   useEffect(() => {
-    const timer = setTimeout(onDone, reduced ? 400 : 2600);
+    const timer = setTimeout(onDone, reduced ? 400 : 2800);
     return () => clearTimeout(timer);
   }, [onDone, reduced]);
+
+  const items = [
+    {
+      label: "eat",
+      icon: (
+        <motion.div
+          animate={reduced ? {} : { rotate: [0, -15, 15, -10, 0] }}
+          transition={{ delay: 0.3, duration: 0.7, ease: "easeInOut" }}
+        >
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+            <path d="M7 2v20" />
+            <path d="M21 15V2a5 5 0 0 0-5 5v6h3.5c.8 0 1.5.7 1.5 1.5v.5" />
+            <path d="M18 21v-3" />
+          </svg>
+        </motion.div>
+      ),
+    },
+    {
+      label: "sleep",
+      icon: (
+        <motion.div
+          animate={reduced ? {} : { y: [0, -6, 0, -4, 0] }}
+          transition={{ delay: 0.5, duration: 1.2, ease: "easeInOut" }}
+        >
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          </svg>
+        </motion.div>
+      ),
+    },
+    {
+      label: "code",
+      icon: (
+        <motion.div
+          animate={reduced ? {} : { scaleX: [1, 1.18, 0.88, 1.08, 1] }}
+          transition={{ delay: 0.7, duration: 0.7, ease: "easeInOut" }}
+        >
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="16 18 22 12 16 6" />
+            <polyline points="8 6 2 12 8 18" />
+          </svg>
+        </motion.div>
+      ),
+    },
+    {
+      label: "repeat",
+      icon: (
+        <motion.div
+          animate={reduced ? {} : { rotate: [0, 360] }}
+          transition={{ delay: 0.9, duration: 0.8, ease: [0.23, 1, 0.32, 1] as [number,number,number,number] }}
+        >
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M17 2l4 4-4 4" />
+            <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+            <path d="M7 22l-4-4 4-4" />
+            <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+          </svg>
+        </motion.div>
+      ),
+    },
+  ];
 
   return (
     <motion.div
@@ -52,7 +107,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
       }}
     >
       <div className="loader-items">
-        {loaderItems.map((item, i) => (
+        {items.map((item, i) => (
           <motion.div
             key={item.label}
             className="loader-item"
@@ -67,8 +122,8 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
             <span className="loader-item-icon">{item.icon}</span>
             <span className="loader-item-fn">
               <span className="loader-fn-name">{item.label}</span>
-              <span className="loader-fn-paren loader-fn-open">(</span>
-              <span className="loader-fn-paren loader-fn-close">)</span>
+              <span className="loader-fn-open">(</span>
+              <span className="loader-fn-close">)</span>
               <span className="loader-fn-semi">;</span>
             </span>
           </motion.div>
