@@ -26,12 +26,19 @@ import { motion, useMotionValue, useSpring, useReducedMotion, AnimatePresence } 
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ── Loading Screen — DM monogram + progress bar ──────────────────────────────
+// ── Loading Screen — eat(); sleep(); code(); repeat(); ───────────────────────
+const loaderItems = [
+  { icon: "🍴", label: "eat",    semi: true },
+  { icon: "🛌", label: "sleep",  semi: true },
+  { icon: "</>", label: "code",  semi: true },
+  { icon: "↻",  label: "repeat", semi: true },
+];
+
 function LoadingScreen({ onDone }: { onDone: () => void }) {
   const reduced = useReducedMotion();
 
   useEffect(() => {
-    const timer = setTimeout(onDone, reduced ? 400 : 2200);
+    const timer = setTimeout(onDone, reduced ? 400 : 2600);
     return () => clearTimeout(timer);
   }, [onDone, reduced]);
 
@@ -40,39 +47,33 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
       className="loader"
       initial={{ opacity: 1 }}
       exit={{
-        y: "-100%",
-        transition: { duration: 0.7, ease: [0.77, 0, 0.175, 1] as [number,number,number,number] },
+        opacity: 0,
+        transition: { duration: 0.5, ease: [0.23, 1, 0.32, 1] as [number,number,number,number] },
       }}
     >
-      <motion.div
-        className="loader-monogram"
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] as [number,number,number,number] }}
-      >
-        DM
-      </motion.div>
-      <motion.div
-        className="loader-bar-wrap"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.4 }}
-      >
-        <motion.div
-          className="loader-bar"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 0.5, duration: 1.4, ease: [0.23, 1, 0.32, 1] as [number,number,number,number] }}
-        />
-      </motion.div>
-      <motion.p
-        className="loader-label"
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 0.5, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.5 }}
-      >
-        
-      </motion.p>
+      <div className="loader-items">
+        {loaderItems.map((item, i) => (
+          <motion.div
+            key={item.label}
+            className="loader-item"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: reduced ? 0 : i * 0.18,
+              duration: 0.5,
+              ease: [0.23, 1, 0.32, 1] as [number,number,number,number],
+            }}
+          >
+            <span className="loader-item-icon">{item.icon}</span>
+            <span className="loader-item-fn">
+              <span className="loader-fn-name">{item.label}</span>
+              <span className="loader-fn-paren loader-fn-open">(</span>
+              <span className="loader-fn-paren loader-fn-close">)</span>
+              <span className="loader-fn-semi">;</span>
+            </span>
+          </motion.div>
+        ))}
+      </div>
     </motion.div>
   );
 }

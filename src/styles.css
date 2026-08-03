@@ -1097,46 +1097,61 @@ footer {
   inset: 0;
   z-index: 999;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 28px;
-  background: #0d0a1a;
+  background: #111111;
   pointer-events: all;
 }
 
-.loader-monogram {
-  font-size: clamp(4rem, 12vw, 8rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: var(--yellow);
-  filter: drop-shadow(0 0 40px rgba(255, 242, 117, 0.5));
+.loader-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 6vw, 72px);
+  flex-wrap: wrap;
+  padding: 0 24px;
+}
+
+.loader-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.loader-item-icon {
+  font-size: clamp(2rem, 5vw, 3.2rem);
   line-height: 1;
+  filter: grayscale(0.3) opacity(0.75);
 }
 
-.loader-bar-wrap {
-  width: min(280px, 60vw);
-  height: 2px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-}
-
-.loader-bar {
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(90deg, var(--yellow), var(--iris));
-  transform-origin: left center;
-  border-radius: 999px;
-}
-
-.loader-label {
-  font-size: 0.88rem;
+.loader-item-fn {
+  font-family: "Space Grotesk", monospace;
+  font-size: clamp(0.85rem, 2vw, 1.15rem);
   font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--offwhite);
-  margin: 0;
-  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+}
+
+.loader-fn-name {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Open paren — Butter Yellow */
+.loader-fn-open {
+  color: var(--yellow);
+}
+
+/* Close paren — Royal Iris (bright version for dark bg) */
+.loader-fn-close {
+  color: #7c5cfc;
+}
+
+/* Semicolon — muted */
+.loader-fn-semi {
+  color: rgba(255, 255, 255, 0.3);
 }
 /* ── /Loading Screen ──────────────────────────────────────────────────────── */
 
