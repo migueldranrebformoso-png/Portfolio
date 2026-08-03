@@ -280,11 +280,11 @@ const techLogos = [
   },
   {
     name: "HTML",
-    svg: <svg viewBox="0 0 452 520" fill="none"><path d="M41 460L0 0h451l-41 460-185 52L41 460z" fill="#E44D26"/><path d="M226 472l149-41 35-394H226V472z" fill="#F16529"/><path d="M226 208h-75l-5-58h80V92H84l13 148h129v-32zM226 355l-64-17-4-45h-56l8 90 116 32v-60z" fill="#EBEBEB"/><path d="M226 208v68h70l-7 77-63 17v62l116-32 8-90 13-102H226zM226 150V92h126l-4 58H226z" fill="white"/></svg>,
+    svg: <svg viewBox="0 0 32 32" fill="none"><path d="M6 28L4 4h24l-2 24-10 3L6 28z" fill="#E44D26"/><path d="M16 29.5l8.1-2.2L26 6H16v23.5z" fill="#F16529"/><path d="M16 13H11.5l-.3-3.5H16V6H8.6l.9 10H16v-3zm0 8.6l-4.2-1.1-.3-3H8.9l.6 6.5L16 26v-3.4z" fill="#EBEBEB"/><path d="M16 13v3h4.1l-.4 4.5-3.7 1V25l6.8-1.9.9-10H16zm0-7v3.5h7.7l.3-3.5H16z" fill="white"/></svg>,
   },
   {
     name: "CSS",
-    svg: <svg viewBox="0 0 452 520" fill="none"><path d="M41 460L0 0h451l-41 460-185 52L41 460z" fill="#1172B8"/><path d="M226 472l149-41 35-394H226V472z" fill="#33AADD"/><path d="M226 308h-62l-4-45h66v-56H95l13 148h118v-47zM226 150H95l4 44h127V150zM226 355v49l63-17 7-79H236l-3 30-7 2v15z" fill="#EBEBEB"/><path d="M226 308v47l63-17 7-77H226v47h43l-3 30-40 10z" fill="white"/><path d="M226 194v56h69l-4 44H226v56h62l8-90 4-66H226z" fill="white"/><path d="M226 150v44h122l-4-44H226z" fill="white"/></svg>,
+    svg: <svg viewBox="0 0 32 32" fill="none"><path d="M6 28L4 4h24l-2 24-10 3L6 28z" fill="#1572B6"/><path d="M16 29.5l8.1-2.2L26 6H16v23.5z" fill="#33A9DC"/><path d="M16 13h-4.4l-.3-3H16V7H9l.8 9H16v-3zm0 8.6l-4.1-1.1-.3-2.5H9l.5 5.7L16 26v-3.4z" fill="#EBEBEB"/><path d="M16 13v3h4l-.4 4.5-3.6 1V25l6.7-1.9.9-10H16zm0-6v3h7.4l.3-3H16z" fill="white"/></svg>,
   },
   {
     name: "JavaScript",
@@ -308,7 +308,7 @@ const techLogos = [
   },
   {
     name: "PHP",
-    svg: <svg viewBox="0 0 256 134" fill="none"><ellipse cx="128" cy="67" rx="128" ry="67" fill="#8892BF"/><path d="M38.9 95.5l14.1-71.9H87c14 0 21.2 6.5 21.2 17.9 0 16.3-12.2 26.7-29.7 26.7H63.4L59.6 95.5H38.9zm27.1-43.1l-3.1 16h10.6c7.5 0 12.6-3.9 12.6-10.5 0-4.4-2.8-5.5-7.5-5.5H66zM113.2 95.5l14.1-71.9H147l-3.9 19.5h17.2c14 0 20.2 6 20.2 15.8 0 17.3-12.1 36.6-36.4 36.6H113.2zm29.3-17.1h7.5c8.5 0 14.3-8.1 14.3-16.1 0-4.4-2.5-6-7-6h-9.8l-5 22.1zM195.5 95.5l14.1-71.9h19.7l-5.6 28.4h18.9l5.6-28.4h19.7L254 95.5h-19.7l5.8-29.4h-18.9l-5.8 29.4H195.5z" fill="white"/></svg>,
+    svg: <svg viewBox="0 0 32 16" fill="none"><ellipse cx="16" cy="8" rx="16" ry="8" fill="#8892BF"/><path d="M5.5 12l1.4-8H9c1.5 0 2.5.7 2.5 2 0 1.8-1.4 2.9-3.2 2.9H7.1L6.8 12H5.5zm2-4.6l-.3 1.8h1c.8 0 1.3-.4 1.3-1.1 0-.5-.3-.7-.8-.7H7.5zM12 12l1.4-8h1.6l-.4 2.2H16c1.4 0 2.1.6 2.1 1.7 0 1.9-1.3 3.3-3.6 3.3H12zm2.2-1.6h.8c.9 0 1.5-.9 1.5-1.8 0-.5-.3-.7-.8-.7h-1L14.2 10.4zM20 12l1.4-8h1.7l-.5 2.6h1.7l.5-2.6H26.5L25.1 12h-1.7l.6-3.3h-1.7L21.7 12H20z" fill="white"/></svg>,
   },
 ];
 
