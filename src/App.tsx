@@ -31,7 +31,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
   const reduced = useReducedMotion();
 
   useEffect(() => {
-    const timer = setTimeout(onDone, reduced ? 400 : 2800);
+    const timer = setTimeout(onDone, reduced ? 400 : 3000);
     return () => clearTimeout(timer);
   }, [onDone, reduced]);
 
@@ -102,8 +102,8 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
       className="loader"
       initial={{ opacity: 1 }}
       exit={{
-        opacity: 0,
-        transition: { duration: 0.5, ease: [0.23, 1, 0.32, 1] as [number,number,number,number] },
+        y: "-100%",
+        transition: { duration: 0.75, ease: [0.77, 0, 0.175, 1] as [number,number,number,number] },
       }}
     >
       <div className="loader-items">
@@ -113,6 +113,15 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
             className="loader-item"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
+            exit={{
+              opacity: 0,
+              y: -16,
+              transition: {
+                delay: i * 0.05,
+                duration: 0.3,
+                ease: [0.23, 1, 0.32, 1] as [number,number,number,number],
+              },
+            }}
             transition={{
               delay: reduced ? 0 : i * 0.18,
               duration: 0.5,
