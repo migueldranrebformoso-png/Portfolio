@@ -308,7 +308,12 @@ const techLogos = [
   },
   {
     name: "PHP",
-    svg: <svg viewBox="0 0 32 16" fill="none"><ellipse cx="16" cy="8" rx="16" ry="8" fill="#8892BF"/><path d="M5.5 12l1.4-8H9c1.5 0 2.5.7 2.5 2 0 1.8-1.4 2.9-3.2 2.9H7.1L6.8 12H5.5zm2-4.6l-.3 1.8h1c.8 0 1.3-.4 1.3-1.1 0-.5-.3-.7-.8-.7H7.5zM12 12l1.4-8h1.6l-.4 2.2H16c1.4 0 2.1.6 2.1 1.7 0 1.9-1.3 3.3-3.6 3.3H12zm2.2-1.6h.8c.9 0 1.5-.9 1.5-1.8 0-.5-.3-.7-.8-.7h-1L14.2 10.4zM20 12l1.4-8h1.7l-.5 2.6h1.7l.5-2.6H26.5L25.1 12h-1.7l.6-3.3h-1.7L21.7 12H20z" fill="white"/></svg>,
+    svg: (
+      <svg viewBox="0 0 64 32" fill="none">
+        <rect width="64" height="32" rx="16" fill="#8892BF"/>
+        <text x="32" y="22" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="16" fill="white">PHP</text>
+      </svg>
+    ),
   },
 ];
 
