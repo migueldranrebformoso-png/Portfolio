@@ -993,11 +993,10 @@ h3 {
   display: block;
 }
 
-/* Cert images use cover to fill the visual area nicely */
+/* Credly badge images need contain so the full badge shows */
 .cert-visual img {
-  object-fit: cover;
-  object-position: center top;
-  padding: 0;
+  object-fit: contain;
+  padding: 12px;
 }
 
 /* Certificate visual: iris gradient */

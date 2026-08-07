@@ -386,14 +386,14 @@ const certificates = [
     title: "AI Fundamentals: Foundations for Understanding AI",
     issuer: "Cisco x IBM SkillsBuild",
     date: "2026",
-    image: "/certs/AI_Fundamentals-_Foundations_for_Understanding_AI_certificate_miguel-dranreb-formoso-gmail-com_9c4ae984-428e-4f8c-ad24-cad802a87358_page-0001.jpg",
+    image: "https://images.credly.com/size/340x340/images/fa29f782-3029-44f9-9fb1-631c3278a68a/blob",
     badgeUrl: "https://www.credly.com/badges/9325ef49-5054-48d5-a1f0-44e3a0dc282c/public_url",
   },
   {
     title: "IT Customer Support Basics",
     issuer: "Cisco",
     date: "2026",
-    image: "/certs/IT_Customer_Support_Basics_certificate_miguel-dranreb-formoso-gmail-com_cd02e3b1-513b-4dc7-857c-588ca803daad_page-0001.jpg",
+    image: "https://images.credly.com/size/340x340/images/474a03c6-b5e1-44df-b313-adf0fed6c531/blob",
     badgeUrl: "https://www.credly.com/badges/e431c316-3c0c-499e-8a4c-32dac316c5d5/public_url",
   },
   {
