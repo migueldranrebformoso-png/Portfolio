@@ -466,17 +466,31 @@ function Carousel({
   };
 
   // pointer drag
+  const hasDragged = useRef(false);
+
   const onPointerDown = (e: React.PointerEvent) => {
     isDragging.current = true;
+    hasDragged.current = false;
     startX.current = e.clientX;
     startScroll.current = trackRef.current?.scrollLeft ?? 0;
     trackRef.current?.setPointerCapture(e.pointerId);
   };
   const onPointerMove = (e: React.PointerEvent) => {
     if (!isDragging.current || !trackRef.current) return;
-    trackRef.current.scrollLeft = startScroll.current - (e.clientX - startX.current);
+    const diff = e.clientX - startX.current;
+    if (Math.abs(diff) > 4) hasDragged.current = true;
+    trackRef.current.scrollLeft = startScroll.current - diff;
   };
   const onPointerUp = () => { isDragging.current = false; };
+
+  // Block click only if user actually dragged
+  const onClickCapture = (e: React.MouseEvent) => {
+    if (hasDragged.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      hasDragged.current = false;
+    }
+  };
 
   return (
     <div className="carousel-wrap" aria-label={label}>
@@ -487,6 +501,7 @@ function Carousel({
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerUp}
+        onClickCapture={onClickCapture}
       >
         {children}
       </div>
