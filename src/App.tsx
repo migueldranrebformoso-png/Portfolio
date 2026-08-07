@@ -383,10 +383,18 @@ const timeline = [
 // ── Add your certificates here ─────────────────────────────────────────────
 const certificates = [
   {
-    title: "Commit to the Cloud:A Hands-on Introduction to GIT, GitHub & Cloud Deployment with AWS  ",
+    title: "AI Fundamentals: Foundations for Understanding AI",
+    issuer: "Cisco x IBM SkillsBuild",
+    date: "2026",
+    image: "https://images.credly.com/size/340x340/images/fa29f782-3029-44f9-9fb1-631c3278a68a/blob",
+    badgeUrl: "https://www.credly.com/badges/9325ef49-5054-48d5-a1f0-44e3a0dc282c/public_url",
+  },
+  {
+    title: "Commit to the Cloud: A Hands-on Introduction to GIT, GitHub & Cloud Deployment with AWS",
     issuer: "Amazon Web Services / QCU",
     date: "2026",
     image: "/certs/aws-qcu.jpg",
+    badgeUrl: null,
   },
   // copy the block above to add more
 ];
@@ -988,6 +996,16 @@ function App() {
                     <span className="carousel-card-date">{cert.date}</span>
                     <h3>{cert.title}</h3>
                     <p>{cert.issuer}</p>
+                    {cert.badgeUrl && (
+                      <a
+                        href={cert.badgeUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="carousel-card-link"
+                      >
+                        View Badge <IconArrowUpRight size={14} />
+                      </a>
+                    )}
                   </div>
                 </article>
               ))}
