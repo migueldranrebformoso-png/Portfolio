@@ -390,6 +390,13 @@ const certificates = [
     badgeUrl: "https://www.credly.com/badges/9325ef49-5054-48d5-a1f0-44e3a0dc282c/public_url",
   },
   {
+    title: "IT Customer Support Basics",
+    issuer: "Cisco",
+    date: "2026",
+    image: "https://images.credly.com/size/340x340/images/474a03c6-b5e1-44df-b313-adf0fed6c531/blob",
+    badgeUrl: "https://www.credly.com/badges/e431c316-3c0c-499e-8a4c-32dac316c5d5/public_url",
+  },
+  {
     title: "Commit to the Cloud: A Hands-on Introduction to GIT, GitHub & Cloud Deployment with AWS",
     issuer: "Amazon Web Services / QCU",
     date: "2026",
